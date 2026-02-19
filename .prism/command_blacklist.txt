@@ -1,0 +1,5 @@
+(^|\s)(pip|pip3)\s+install(\s|$)
+(^|\s)apt(-get)?\s+install(\s|$)
+(^|\s)python(\d+(\.\d+)?)?\s+-m\s+pip\s+install(\s|$)
+(^|\s)snap\s+install(\s|$)
+(^|\s)sudo\s+apt(\s|$)

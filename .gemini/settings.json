@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "orchestrator": {
+      "command": "/home/powerhouse/Documents/prsm-cli/.venv/bin/python",
+      "args": [
+        "-m",
+        "prsm.engine.mcp_server.orch_proxy",
+        "--port",
+        "41869"
+      ]
+    }
+  },
+  "general": {
+    "previewFeatures": true
+  }
+}

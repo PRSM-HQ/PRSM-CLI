@@ -1,0 +1,223 @@
+/* PRSM CLI — Root application stylesheet */
+
+Screen {
+    background: $surface;
+}
+
+Header {
+    dock: top;
+}
+
+Footer {
+    dock: bottom;
+}
+
+/* ── Split-pane workspace ── */
+
+#workspace {
+    height: 1fr;
+}
+
+#agent-tree {
+    dock: left;
+    width: 34;
+    min-width: 20;
+    max-width: 50;
+    border-right: tall $surface-lighten-1;
+    padding: 0;
+}
+
+#agent-tree Tree {
+    padding: 0 1;
+}
+
+#agent-tree .tree--cursor {
+    background: $accent-darken-2;
+    text-style: bold;
+}
+
+#agent-tree .tree--guides {
+    color: $surface-lighten-2;
+}
+
+#agent-tree .tree--guides-hover {
+    color: $accent 50%;
+}
+
+#agent-tree .tree--guides-selected {
+    color: $accent;
+}
+
+#main-pane {
+    width: 1fr;
+    height: 1fr;
+}
+
+/* ── Conversation ── */
+
+#conversation {
+    height: 1fr;
+    padding: 0 1;
+    overflow-y: auto;
+}
+
+.message-user {
+    background: $primary-darken-3;
+    margin: 1 0;
+    padding: 1 2;
+    border-left: thick $primary;
+}
+
+.message-clickable:hover {
+    background: $primary-darken-2;
+    border-left: thick $accent;
+}
+
+.message-assistant {
+    margin: 1 0;
+    padding: 1 2;
+}
+
+.message-system {
+    color: $text-muted;
+    margin: 1 0;
+    padding: 0 2;
+}
+
+.tool-call {
+    margin: 0 0 0 4;
+    padding: 0 2;
+    color: $text-muted;
+}
+
+.tool-call:hover {
+    background: $surface-lighten-1;
+}
+
+.tool-call.expanded {
+    background: $surface-darken-1;
+    padding: 1 2;
+    border: round $accent-darken-1;
+    color: $text;
+}
+
+/* ── Tool log (collapsible) ── */
+
+#tool-log {
+    height: 14;
+    display: none;
+    border-top: tall $surface-lighten-1;
+}
+
+#tool-log.visible {
+    display: block;
+}
+
+/* ── Input bar ── */
+
+#input-bar {
+    dock: bottom;
+    height: auto;
+    min-height: 3;
+    max-height: 12;
+    padding: 0 1;
+    border-top: tall $surface-lighten-1;
+    layers: default overlay;
+}
+
+/* ── File completer (@ autocomplete overlay) ── */
+
+#file-completer {
+    dock: bottom;
+    offset-y: -100%;
+}
+
+#input-bar #prompt-input {
+    width: 1fr;
+    height: auto;
+    min-height: 1;
+    max-height: 10;
+}
+
+#input-bar #prompt-input.command-mode .text-input--cursor,
+#input-bar #prompt-input.command-mode .text-input--text {
+    color: $accent;
+}
+
+#input-bar Horizontal {
+    height: auto;
+}
+
+#input-bar #send-btn {
+    dock: right;
+    width: 10;
+    margin: 0 0 0 1;
+    min-height: 3;
+}
+
+/* ── Status bar ── */
+
+#status-bar {
+    dock: bottom;
+    height: 1;
+    background: $primary-darken-2;
+    color: $text;
+    padding: 0 1;
+}
+
+#status-bar.demo-mode {
+    background: #7a5c00;
+}
+
+/* ── Thinking indicator ── */
+
+.thinking-indicator {
+    margin: 1 0;
+    padding: 0 2;
+    color: $accent;
+    text-style: italic;
+}
+
+/* ── Question widget ── */
+
+QuestionWidget .question-option-row {
+    height: auto;
+    margin: 0 0 1 0;
+}
+
+QuestionWidget .question-option-row Button {
+    min-width: 14;
+    margin: 0 1 0 0;
+}
+
+QuestionWidget .question-option-row .option-description {
+    color: $text-muted;
+    content-align: left middle;
+}
+
+/* ── Demo mode banner ── */
+
+.demo-banner {
+    background: #7a5c00;
+    color: #ffe066;
+    text-align: center;
+    text-style: bold;
+    padding: 1 2;
+    margin: 1 0;
+}
+
+/* ── Agent context panel (side panel) ── */
+
+#agent-context-panel {
+    dock: right;
+    width: 60;
+    min-width: 40;
+    max-width: 80;
+    border-left: tall $surface-lighten-1;
+    background: $surface;
+    display: none;
+}
+
+#agent-context-panel.visible {
+    display: block;
+}

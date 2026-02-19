@@ -1,0 +1,789 @@
+/* PRSM CLI — Modal dialog styles */
+
+PermissionScreen {
+    align: center middle;
+}
+
+#permission-dialog {
+    width: 80;
+    height: auto;
+    max-height: 24;
+    border: thick $warning;
+    background: $surface;
+    padding: 1 2;
+}
+
+#permission-title {
+    text-style: bold;
+    color: $warning;
+    margin-bottom: 1;
+}
+
+#permission-details {
+    margin: 1 0;
+    max-height: 12;
+    overflow-y: auto;
+    background: $surface-darken-1;
+    padding: 1;
+}
+
+#permission-buttons {
+    layout: horizontal;
+    height: 3;
+    align: center middle;
+}
+
+#permission-buttons Button {
+    margin: 0 1;
+    min-width: 16;
+}
+
+/* ── Agent context menu ── */
+
+AgentContextMenu {
+    align: center middle;
+}
+
+#context-menu {
+    width: 32;
+    height: auto;
+    border: solid $accent;
+    background: $surface;
+    padding: 1 2;
+}
+
+#ctx-title {
+    text-style: bold;
+    margin-bottom: 1;
+}
+
+#context-menu Button {
+    width: 100%;
+    margin: 0;
+}
+
+/* ── Kill agent confirmation ── */
+
+KillConfirmScreen {
+    align: center middle;
+}
+
+#kill-confirm-dialog {
+    width: 56;
+    height: auto;
+    max-height: 18;
+    border: thick $error;
+    background: $surface;
+    padding: 1 2;
+}
+
+#kill-confirm-dialog Label {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1;
+}
+
+#kill-confirm-details {
+    margin-bottom: 1;
+}
+
+#kill-confirm-dialog .info-text {
+    width: 100%;
+    margin-bottom: 1;
+    color: $text-muted;
+}
+
+#kill-confirm-dialog Button {
+    width: 100%;
+    margin-bottom: 1;
+}
+
+#kill-confirm-dialog Button:focus {
+    border: tall $accent;
+}
+
+/* ── File context modal ── */
+
+FileContextScreen {
+    align: center middle;
+}
+
+#file-context-dialog {
+    width: 90;
+    height: auto;
+    max-height: 30;
+    border: thick $primary;
+    background: $surface;
+    padding: 1 2;
+}
+
+#file-context-title {
+    text-style: bold;
+    color: $primary;
+    margin-bottom: 1;
+}
+
+#file-context-header {
+    margin-bottom: 1;
+}
+
+#file-context-content {
+    margin: 1 0;
+    max-height: 20;
+    background: $surface-darken-1;
+    padding: 1;
+    border: solid $accent;
+}
+
+#file-context-dialog Button {
+    width: 100%;
+    margin-top: 1;
+}
+
+/* ── Worktree list modal ── */
+
+WorktreeListScreen {
+    align: center middle;
+}
+
+#worktree-dialog {
+    width: 90;
+    height: auto;
+    max-height: 34;
+    border: thick $primary;
+    background: $surface;
+    padding: 1 2;
+}
+
+#worktree-title {
+    text-style: bold;
+    color: $primary;
+    margin-bottom: 1;
+}
+
+#worktree-empty {
+    margin: 1 0;
+}
+
+#worktree-list {
+    margin: 1 0;
+    max-height: 20;
+    background: $surface-darken-1;
+    padding: 1;
+    border: solid $accent;
+}
+
+.worktree-entry {
+    margin-bottom: 1;
+    padding: 0 1;
+}
+
+.worktree-entry-buttons {
+    layout: horizontal;
+    height: 3;
+    margin-top: 0;
+}
+
+.worktree-entry-buttons Button {
+    margin: 0 1 0 0;
+    min-width: 12;
+}
+
+#worktree-actions {
+    layout: horizontal;
+    height: 3;
+    align: center middle;
+    margin-top: 1;
+}
+
+#worktree-actions Button {
+    margin: 0 1;
+    min-width: 16;
+}
+
+/* ── Worktree create modal ── */
+
+WorktreeCreateScreen {
+    align: center middle;
+}
+
+#worktree-create-dialog {
+    width: 70;
+    height: auto;
+    max-height: 22;
+    border: thick $success;
+    background: $surface;
+    padding: 1 2;
+}
+
+#worktree-create-title {
+    text-style: bold;
+    color: $primary;
+    margin-bottom: 1;
+}
+
+#worktree-create-dialog Label {
+    margin: 1 0 0 0;
+}
+
+#worktree-create-dialog Input {
+    margin-bottom: 0;
+}
+
+#worktree-create-dialog Input.error {
+    border: tall $error;
+}
+
+#wt-create-hint {
+    margin: 1 0;
+}
+
+#worktree-create-buttons {
+    layout: horizontal;
+    height: 3;
+    align: center middle;
+    margin-top: 1;
+}
+
+#worktree-create-buttons Button {
+    margin: 0 1;
+    min-width: 14;
+}
+
+/* ── Worktree remove confirmation ── */
+
+WorktreeRemoveScreen {
+    align: center middle;
+}
+
+#worktree-remove-dialog {
+    width: 70;
+    height: auto;
+    max-height: 16;
+    border: thick $warning;
+    background: $surface;
+    padding: 1 2;
+}
+
+#worktree-remove-title {
+    text-style: bold;
+    color: $warning;
+    margin-bottom: 1;
+}
+
+#worktree-remove-buttons {
+    layout: horizontal;
+    height: 3;
+    align: center middle;
+    margin-top: 1;
+}
+
+#worktree-remove-buttons Button {
+    margin: 0 1;
+    min-width: 14;
+}
+
+/* ── Worktree switch confirmation ── */
+
+WorktreeSwitchScreen {
+    align: center middle;
+}
+
+#worktree-switch-dialog {
+    width: 70;
+    height: auto;
+    max-height: 16;
+    border: thick $primary;
+    background: $surface;
+    padding: 1 2;
+}
+
+#worktree-switch-title {
+    text-style: bold;
+    color: $primary;
+    margin-bottom: 1;
+}
+
+#worktree-switch-buttons {
+    layout: horizontal;
+    height: 3;
+    align: center middle;
+    margin-top: 1;
+}
+
+#worktree-switch-buttons Button {
+    margin: 0 1;
+    min-width: 14;
+}
+
+/* ── Command policy modal ── */
+
+CommandPolicyScreen {
+    align: center middle;
+}
+
+#cmd-policy-dialog {
+    width: 90;
+    height: auto;
+    max-height: 40;
+    border: thick $primary;
+    background: $surface;
+    padding: 1 2;
+}
+
+#cmd-policy-title {
+    text-style: bold;
+    color: $primary;
+    margin-bottom: 1;
+}
+
+#cmd-policy-hint {
+    margin-bottom: 1;
+}
+
+#cmd-policy-wl-header,
+#cmd-policy-bl-header {
+    margin: 1 0 0 0;
+}
+
+#cmd-policy-wl-list,
+#cmd-policy-bl-list {
+    margin: 0 0 0 0;
+    max-height: 8;
+    background: $surface-darken-1;
+    padding: 0 1;
+    border: solid $accent;
+}
+
+.cmd-policy-add-row {
+    layout: horizontal;
+    height: 3;
+    margin: 0 0 1 0;
+}
+
+.cmd-policy-add-row Input {
+    width: 1fr;
+    margin-right: 1;
+}
+
+.cmd-policy-add-row Input.error {
+    border: tall $error;
+}
+
+.cmd-policy-add-row Button {
+    min-width: 10;
+}
+
+.cmd-policy-entry {
+    layout: horizontal;
+    height: 3;
+    align: left middle;
+}
+
+.cmd-policy-pattern {
+    width: 1fr;
+}
+
+.cmd-policy-rm-btn {
+    min-width: 10;
+    margin-left: 1;
+}
+
+#cmd-policy-actions {
+    layout: horizontal;
+    height: 3;
+    align: center middle;
+    margin-top: 1;
+}
+
+#cmd-policy-actions Button {
+    margin: 0 1;
+    min-width: 14;
+}
+
+/* ── Settings modal ── */
+
+SettingsScreen {
+    align: center middle;
+}
+
+#settings-dialog {
+    width: 90;
+    height: auto;
+    max-height: 80%;
+    border: thick $primary;
+    background: $surface;
+    padding: 1 2;
+}
+
+#settings-title {
+    text-style: bold;
+    color: $primary;
+    margin-bottom: 1;
+}
+
+#settings-policy-header,
+#settings-wl-header,
+#settings-bl-header,
+#settings-revert-header {
+    margin: 1 0 0 0;
+}
+
+.settings-desc {
+    margin-bottom: 0;
+}
+
+#settings-wl-list,
+#settings-bl-list {
+    height: 8;
+    margin-top: 1;
+    border: round $panel-lighten-1;
+    padding: 0 1;
+}
+
+.settings-policy-add-row {
+    layout: horizontal;
+    height: 3;
+    margin: 1 0;
+}
+
+.settings-policy-add-row Input {
+    width: 1fr;
+    margin-right: 1;
+}
+
+.settings-policy-add-row Input.error {
+    border: tall $error;
+}
+
+.settings-policy-add-row Button {
+    min-width: 10;
+}
+
+.settings-policy-entry {
+    layout: horizontal;
+    height: 3;
+    align: left middle;
+}
+
+.settings-policy-pattern {
+    width: 1fr;
+}
+
+.settings-policy-rm-btn {
+    min-width: 10;
+    margin-left: 1;
+}
+
+#settings-revert-select {
+    margin: 1 0;
+    width: 100%;
+}
+
+#settings-actions {
+    layout: horizontal;
+    height: 3;
+    align: center middle;
+    margin-top: 1;
+}
+
+#settings-actions Button {
+    margin: 0 1;
+    min-width: 14;
+}
+
+/* ── Session search modal ── */
+
+SessionSearchScreen {
+    align: center middle;
+}
+
+#session-search-dialog {
+    width: 96;
+    height: auto;
+    max-height: 34;
+    border: thick $primary;
+    background: $surface;
+    padding: 1 2;
+}
+
+#session-search-title {
+    text-style: bold;
+    color: $primary;
+    margin-bottom: 1;
+}
+
+#session-search-input {
+    margin-bottom: 1;
+}
+
+#session-search-hint {
+    color: $text-muted;
+    margin-bottom: 1;
+}
+
+#session-search-list {
+    max-height: 22;
+    background: $surface-darken-1;
+    padding: 1;
+    border: solid $accent;
+}
+
+.session-search-item {
+    width: 1fr;
+    margin: 0;
+    height: auto;
+    min-height: 3;
+}
+
+.session-search-row {
+    layout: horizontal;
+    width: 100%;
+    margin: 0 0 1 0;
+    height: auto;
+    min-height: 3;
+}
+
+.session-search-copy {
+    width: 5;
+    min-width: 5;
+    margin: 0 0 0 1;
+}
+
+#session-search-actions {
+    layout: horizontal;
+    height: 3;
+    align: center middle;
+    margin-top: 1;
+}
+
+#session-search-actions Button {
+    min-width: 14;
+}
+
+/* ── Import picker modal ── */
+
+ImportSessionPickerScreen {
+    align: center middle;
+}
+
+#import-picker-dialog {
+    width: 100;
+    height: auto;
+    max-height: 36;
+    border: thick $primary;
+    background: $surface;
+    padding: 1 2;
+}
+
+#import-picker-title {
+    text-style: bold;
+    color: $primary;
+    margin-bottom: 1;
+}
+
+#import-picker-input {
+    margin-bottom: 1;
+}
+
+#import-picker-hint {
+    color: $text-muted;
+    margin-bottom: 1;
+}
+
+#import-picker-list {
+    max-height: 22;
+    background: $surface-darken-1;
+    padding: 1;
+    border: solid $accent;
+}
+
+.import-picker-row {
+    layout: horizontal;
+    width: 100%;
+    height: auto;
+    min-height: 3;
+    margin: 0 0 1 0;
+}
+
+.import-picker-label {
+    width: 1fr;
+}
+
+.import-picker-preview {
+    width: 10;
+    min-width: 10;
+    margin: 0 1;
+}
+
+.import-picker-run {
+    width: 10;
+    min-width: 10;
+}
+
+#import-picker-actions {
+    layout: horizontal;
+    height: 3;
+    align: center middle;
+    margin-top: 1;
+}
+
+#import-picker-actions Button {
+    min-width: 14;
+}
+
+/* ── Import depth modal ── */
+
+ImportDepthScreen {
+    align: center middle;
+}
+
+#import-depth-dialog {
+    width: 54;
+    height: auto;
+    max-height: 22;
+    border: thick $primary;
+    background: $surface;
+    padding: 1 2;
+}
+
+#import-depth-title {
+    text-style: bold;
+    color: $primary;
+    margin-bottom: 1;
+}
+
+#import-depth-hint {
+    margin-bottom: 1;
+    color: $text-muted;
+}
+
+.import-depth-choice {
+    width: 100%;
+    margin: 0 0 1 0;
+}
+
+#import-depth-actions {
+    layout: horizontal;
+    height: 3;
+    align: center middle;
+    margin-top: 1;
+}
+
+#import-depth-actions Button {
+    min-width: 14;
+}
+
+/* ── Help modal ── */
+
+HelpScreen {
+    align: center middle;
+}
+
+#help-dialog {
+    width: 96;
+    height: auto;
+    max-height: 36;
+    border: thick $accent;
+    background: $surface;
+    padding: 1 2;
+}
+
+#help-title {
+    text-style: bold;
+    color: $accent;
+    margin-bottom: 1;
+}
+
+#help-body {
+    max-height: 28;
+    overflow-y: auto;
+    background: $surface-darken-1;
+    padding: 1;
+    border: solid $accent-darken-1;
+    margin-bottom: 1;
+}
+
+/* ── File browser modal ── */
+
+FileBrowserScreen {
+    align: center middle;
+}
+
+#file-browser-dialog {
+    width: 96;
+    height: auto;
+    max-height: 36;
+    border: thick $primary;
+    background: $surface;
+    padding: 1 2;
+}
+
+#file-browser-title {
+    text-style: bold;
+    color: $primary;
+    margin-bottom: 1;
+}
+
+#file-browser-path-row {
+    layout: horizontal;
+    height: 3;
+    margin-bottom: 1;
+}
+
+#file-browser-path-input {
+    width: 1fr;
+    margin-right: 1;
+}
+
+#file-browser-location {
+    margin-bottom: 1;
+}
+
+#file-browser-list {
+    max-height: 20;
+    background: $surface-darken-1;
+    padding: 1;
+    border: solid $accent;
+}
+
+#file-browser-status {
+    margin-top: 1;
+}
+
+.file-browser-entry {
+    layout: horizontal;
+    height: 3;
+    width: 100%;
+    align: left middle;
+}
+
+.file-browser-name {
+    width: 1fr;
+}
+
+.file-browser-entry-btn {
+    min-width: 10;
+    margin-left: 1;
+}
+
+#file-browser-actions {
+    layout: horizontal;
+    height: 3;
+    align: center middle;
+    margin-top: 1;
+}
+
+#file-browser-actions Button {
+    min-width: 14;
+}
+
+/* ── Settings import/export section ── */
+
+#settings-import-export-header {
+    margin: 1 0 0 0;
+}
+
+#settings-import-export-status {
+    margin-top: 1;
+}

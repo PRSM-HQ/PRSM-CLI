@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "orchestrator": {
+      "type": "stdio",
+      "command": "/Users/benjaminlevin/Git-Protected-Projects/prsm-cli/.venv/bin/python",
+      "args": [
+        "-m",
+        "prsm.engine.mcp_server.stdio_server",
+        "--config",
+        ".prism/prsm.yaml"
+      ]
+    }
+  }
+}

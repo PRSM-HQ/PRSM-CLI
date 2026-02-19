@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+CODEX_BIN="${REPO_ROOT}/.tools/codex-minimax/node_modules/.bin/codex"
+CODEX_HOME_DIR="${REPO_ROOT}/.tools/codex-minimax-home"
+CONFIG_FILE="${CODEX_HOME_DIR}/config.toml"
+
+if [[ ! -x "${CODEX_BIN}" ]]; then
+  echo "ERROR: MiniMax Codex binary not found at ${CODEX_BIN}" >&2
+  echo "Run: npm install --prefix ${REPO_ROOT}/.tools/codex-minimax @openai/codex@0.57.0" >&2
+  exit 1
+fi
+
+mkdir -p "${CODEX_HOME_DIR}"
+
+if [[ ! -f "${CONFIG_FILE}" ]]; then
+  cat > "${CONFIG_FILE}" <<'EOF'
+profile = "m25"
+
+[model_providers.minimax]
+name = "MiniMax Chat API"
+base_url = "https://api.minimax.io/v1"
+env_key = "MINIMAX_API_KEY"
+wire_api = "chat"
+requires_openai_auth = false
+
+[profiles.m25]
+model = "MiniMax-M2.5"
+model_provider = "minimax"
+EOF
+fi
+
+export CODEX_HOME="${CODEX_HOME_DIR}"
+exec "${CODEX_BIN}" "$@"

@@ -1,0 +1,159 @@
+--- original
++++ modified
+@@ -1056,7 +1056,7 @@
+       "Available slash commands in VS Code chat:",
+       "/help",
+       "/import",
+-      "/import list [all|codex|claude]",
++      "/import list [all|codex|claude|prsm]",
+       "/import preview PROVIDER SOURCE_ID",
+       "/import run PROVIDER SOURCE_ID [SESSION NAME] [--max-turns N]",
+     ].join("\n");
+@@ -1106,7 +1106,7 @@
+ 
+   private parseImportProvider(raw: string): ImportProvider | null {
+     const provider = String(raw || "").trim().toLowerCase();
+-    if (provider === "codex" || provider === "claude") {
++    if (provider === "codex" || provider === "claude" || provider === "prsm") {
+       return provider;
+     }
+     return null;
+@@ -1137,6 +1137,7 @@
+     const all = await transport.listImportSessions("all", 200);
+     const codexCount = all.sessions.filter((s) => s.provider === "codex").length;
+     const claudeCount = all.sessions.filter((s) => s.provider === "claude").length;
++    const prsmCount = all.sessions.filter((s) => s.provider === "prsm").length;
+ 
+     const pick = await vscode.window.showQuickPick(
+       [
+@@ -1149,6 +1150,11 @@
+           label: "Claude",
+           description: `${claudeCount} importable session${claudeCount === 1 ? "" : "s"}`,
+           value: "claude" as ImportProvider,
++        },
++        {
++          label: "PRSM",
++          description: `${prsmCount} importable session${prsmCount === 1 ? "" : "s"}`,
++          value: "prsm" as ImportProvider,
+         },
+       ],
+       {
+@@ -1233,11 +1239,63 @@
+       return;
+     }
+ 
+-    const selected = await this.promptImportSession(provider, sessions);
+-    if (!selected) {
++    // Build QuickPick items with "Import ALL" as the first option
++    const importAllItem = {
++      label: "$(cloud-download) Import ALL Sessions",
++      description: `Import all ${sessions.length} ${provider} session${sessions.length === 1 ? "" : "s"}`,
++      detail: "Bulk-import every session from this provider",
++      value: null as ImportSessionListEntry | null,
++    };
++    const sessionItems = sessions.map((session) => {
++      const title = (session.title || "").trim() || "(untitled)";
++      const updated = this.formatImportTimestamp(session.updated_at || session.started_at);
++      return {
++        label: title,
++        description: `${session.turn_count} turns • updated ${updated}`,
++        detail: `${session.provider}:${session.source_id}`,
++        value: session as ImportSessionListEntry | null,
++      };
++    });
++    const allItems = [importAllItem, ...sessionItems];
++
++    const pick = await vscode.window.showQuickPick(allItems, {
++      title: "Import Transcript",
++      placeHolder: `Select ${provider} session (sorted by recency)`,
++      matchOnDescription: true,
++      matchOnDetail: true,
++    });
++    if (!pick) {
+       this.postSystemMessage(panel, "Import canceled.");
+       return;
+     }
++
++    // Handle "Import ALL" selection
++    if (pick.value === null) {
++      const maxTurns = await this.promptImportDepth();
++      if (maxTurns === undefined) {
++        this.postSystemMessage(panel, "Import canceled.");
++        return;
++      }
++      try {
++        const response = await transport.runImportAll(
++          sessionId,
++          provider,
++          { maxTurns: maxTurns === null ? null : maxTurns }
++        );
++        this.postSystemMessage(
++          panel,
++          `${response.message}\nImported ${response.imported_count} session${response.imported_count === 1 ? "" : "s"}.`
++        );
++      } catch (err) {
++        panel.webview.postMessage({
++          type: "errorMessage",
++          content: `Import all failed: ${(err as Error).message}`,
++        });
++      }
++      return;
++    }
++
++    const selected = pick.value;
+ 
+     const maxTurns = await this.promptImportDepth();
+     if (maxTurns === undefined) {
+@@ -1309,13 +1367,13 @@
+ 
+     if (action === "list") {
+       const provider = (args[1] || "all").toLowerCase();
+-      if (!["all", "codex", "claude"].includes(provider)) {
++      if (!["all", "codex", "claude", "prsm"].includes(provider)) {
+         this.postSystemMessage(panel, `Invalid provider: ${provider}`);
+         return;
+       }
+       try {
+         const resp = await transport.listImportSessions(
+-          provider as "all" | "codex" | "claude",
++          provider as "all" | "codex" | "claude" | "prsm",
+           25
+         );
+         if (!resp.sessions || resp.sessions.length === 0) {
+@@ -1346,13 +1404,13 @@
+       }
+       const provider = args[1].toLowerCase();
+       const sourceId = args[2];
+-      if (!["codex", "claude"].includes(provider)) {
+-        this.postSystemMessage(panel, "Provider must be codex or claude.");
++      if (!["codex", "claude", "prsm"].includes(provider)) {
++        this.postSystemMessage(panel, "Provider must be codex, claude, or prsm.");
+         return;
+       }
+       try {
+         const resp = await transport.previewImportSession(
+-          provider as "codex" | "claude",
++          provider as "codex" | "claude" | "prsm",
+           sourceId
+         );
+         const lines = [
+@@ -1413,8 +1471,8 @@
+ 
+       const provider = parsed.cleaned[0].toLowerCase();
+       const sourceId = parsed.cleaned[1];
+-      if (!["codex", "claude"].includes(provider)) {
+-        this.postSystemMessage(panel, "Provider must be codex or claude.");
++      if (!["codex", "claude", "prsm"].includes(provider)) {
++        this.postSystemMessage(panel, "Provider must be codex, claude, or prsm.");
+         return;
+       }
+       const sessionName = parsed.cleaned.slice(2).join(" ").trim() || undefined;
+@@ -1431,7 +1489,7 @@
+       try {
+         const resp = await transport.runImport(
+           sessionId,
+-          provider as "codex" | "claude",
++          provider as "codex" | "claude" | "prsm",
+           sourceId,
+           {
+             sessionName,
